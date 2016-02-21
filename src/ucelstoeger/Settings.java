@@ -6,7 +6,7 @@ package ucelstoeger;
 import com.beust.jcommander.*;
 
 /**
- * Settings File for the Input - Paremters (CLI) using JCommander
+ * Settings File for the Input - Parameters (CLI) using JCommander
  * 
  * @author Johannes Ucel
  * @version 18. Feb. 2016
@@ -28,5 +28,40 @@ public class Settings {
 	
 	@Parameter(names = "-pw", description = "Password", required = true)
 	private String password;
+
+	/**
+	 * @return the hostname
+	 */
+	public String getHostname() {
+		return hostname;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @return the database
+	 */
+	public String getDatabase() {
+		return database;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public String getUser() {
+		return user;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
 }
