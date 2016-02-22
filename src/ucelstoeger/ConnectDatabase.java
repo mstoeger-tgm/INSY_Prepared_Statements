@@ -14,16 +14,16 @@ import java.sql.*;
  * 
  * 1. Postgres - Connector downloaden
  * 
- * 2. Config vim /etc/postgresql/9.3/main/pg_hba.conf host hinzufügen Hier wird
- * folgender Eintrag hinzugefügt:
+ * 2. Config vim /etc/postgresql/9.3/main/pg_hba.conf host hinzufï¿½gen Hier wird
+ * folgender Eintrag hinzugefï¿½gt:
  * 
  * host schokofabrik schokouser 192.168.203.0/24 md5 (Datenbank) (User)
  * (NetzID/Subnetmask) (authentication)
  * 
  * 3. vim /etc/postgresql/9.3/main/postgresql.conf listen_addresses anpassen
  * 
- * Kommentar (#) entfernen und den Eintrag so ändern, dass auf alle (*) IP -
- * Adressen gehört wird
+ * Kommentar (#) entfernen und den Eintrag so ï¿½ndern, dass auf alle (*) IP -
+ * Adressen gehï¿½rt wird
  * 
  * listen_addresses = '*'
  * 
@@ -33,70 +33,63 @@ import java.sql.*;
  *
  */
 public class ConnectDatabase {
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Settings settings = new Settings();
-		JCommander cmd = new JCommander(settings, args);
-		String hostname = settings.getHostname();
-		int port = settings.getPort();
-		String database = settings.getDatabase();
-		String user = settings.getUser();
-		String password = settings.getPassword();
-		if(settings.getPort()==0)
-			port = 5432; //PostgreSQL Default Port
-		System.out.println("Datenbankname:" +database);
-		System.out.println("Hostname: "+hostname);
+	private String host="", database="", user="", password="";
+	private int port=0;
+	public ConnectDatabase(String args[]){
+		if (args.length == 2) {
+			// Properties file
+			PropertiesFileReader pfr = new PropertiesFileReader();
+			host = pfr.getHost();
+			database = pfr.getDatabase();
+			user = pfr.getUser();
+			password = pfr.getPassword();
+			port = Integer.parseInt(pfr.getPort());
+		} else {
+			// CLI only
+			Settings settings = new Settings();
+			JCommander cmd = new JCommander(settings, args);
+			host = settings.getHostname();
+			port = settings.getPort();
+			database = settings.getDatabase();
+			user = settings.getUser();
+			password = settings.getPassword();
+			if (port == 0)
+				port = 5432; // PostgreSQL Default Port
+		}
+		System.out.println("Datenbankname:" + database);
+		System.out.println("Hostname: " + host);
 		System.out.println(password);
-		System.out.println("Port: "+port);
-		System.out.println("User: "+user);
+		System.out.println("Port: " + port);
+		System.out.println("User: " + user);
 		// Datenquelle erzeugen und konfigurieren
 		PGSimpleDataSource ds = new PGSimpleDataSource();
-		ds.setServerName(hostname); // Die Server-IP
-		ds.setPortNumber(port); //Server - Port
+		ds.setServerName(host); // Die Server-IP
+		ds.setPortNumber(port); // Server - Port
 		ds.setDatabaseName(database); // Datenbankname
 		ds.setUser(user); // Datenbankuser
 		ds.setPassword(password); // Datenbankpasswort
-		/*
-		 * Früher: try { Connection con = ds.getConnection(); // Abfrage
-		 * vorbereiten und ausführen Statement st = con.createStatement();
-		 * ResultSet rs = st.executeQuery("select * from produkt"); while
-		 * (rs.next()) { // Cursor bewegen/iterieren String wert =
-		 * rs.getString(2); System.out.println(wert); } } catch (SQLException e)
-		 * { // TODO Auto-generated catch block e.printStackTrace(); }finally {
-		 * rs.close(); st.close(); con.close(); } Im finally hätte man kein
-		 * Zugriff auf rs, st, con (müssten static oder anders definiert sein)
-		 * 
-		 * Neu seit Java 1.7 AutoCloseable Man erspart sich das "finally", da
-		 * automatisch geclosed wird. ==> Man erstellt die Connection,
-		 * Statement, ResultSet in der runden Klammer vom try-Block und kann
-		 * diese dann normal weiterverwenden
-		 *
-		 */
 		// Verbindung herstellen
 		try (Connection con = ds.getConnection();
-				// Abfrage vorbereiten und ausführen
+				// Abfrage vorbereiten und ausfï¿½hren
 				Statement st = con.createStatement();
 				/*
 				 * Bei createStatement() ohne Paramter werden folgende
-				 * Default-Werte gesetzt TYPE_FORWARD_ONLY (Nur vorwärts im
+				 * Default-Werte gesetzt TYPE_FORWARD_ONLY (Nur vorwï¿½rts im
 				 * ResultSet bewegen) CONCUR_READ_ONLY (ReadyOnly ResultSet)
 				 */
-				ResultSet rs = st.executeQuery("select * from produkt");) { // Select
-																			// Query
-																			// wird
-																			// nicht
-																			// auf
-																			// Syntax
-																			// überprüft
+				ResultSet rs = st.executeQuery("select * from produkt");) {
 			// Ergebnisse verarbeiten
 			while (rs.next()) { // Cursor bewegen/iterieren
 				String wert = rs.getString(2);
 				System.out.println(wert);
 			}
-		} catch (SQLException sql) { // SQLException abfangen
+		} catch (
+
+		SQLException sql)
+
+		{ // SQLException abfangen
 			sql.printStackTrace(System.err);
 		}
 	}
+	
 }

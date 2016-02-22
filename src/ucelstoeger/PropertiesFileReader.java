@@ -2,10 +2,11 @@ package ucelstoeger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class PropertiesFileReader {
-	private String host, port, database, user, password;
+	private String host="", port="5432", database="", user="", password="";
 
 	public void getPropertiesFromFile(String pathToFile) {
 		// Read properties file
@@ -50,6 +51,9 @@ public class PropertiesFileReader {
 				password = e.substring(e.indexOf('=') + 1);
 				break;
 			}
+		}
+		if(host==""||database==""||user==""||password==""){
+			throw new InvalidParameterException("Nicht alle benoetigten Parameter angegeben");
 		}
 	}
 
