@@ -69,6 +69,9 @@ public class ConnectDatabase {
 		ds.setUser(user); // Datenbankuser
 		ds.setPassword(password); // Datenbankpasswort
 		// Verbindung herstellen
+		CRUD cr = new CRUD(ds);
+		cr.update(10, 1);
+		cr.delete(110);
 		try (Connection con = ds.getConnection();
 				// Abfrage vorbereiten und ausf�hren
 				Statement st = con.createStatement();
