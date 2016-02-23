@@ -55,6 +55,10 @@ public class ConnectDatabase {
 			password = settings.getPassword();
 			if (port == 0)
 				port = 5432; // PostgreSQL Default Port
+			if (settings.isHelp()) {
+	            cmd.usage();
+	            return;
+	        }
 		}
 		System.out.println("Datenbankname:" + database);
 		System.out.println("Hostname: " + host);

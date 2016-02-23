@@ -25,9 +25,12 @@ public class Settings {
 
 	@Parameter(names = "-u", description = "User", required = true)
 	private String user;
-	
+
 	@Parameter(names = "-pw", description = "Password", required = true)
 	private String password;
+
+	@Parameter(names = "--help", help = true)
+	private boolean help = false;
 
 	/**
 	 * @return the hostname
@@ -62,6 +65,13 @@ public class Settings {
 	 */
 	public String getPassword() {
 		return password;
+	}
+
+	/**
+	 * @return the help
+	 */
+	public boolean isHelp() {
+		return help;
 	}
 
 }

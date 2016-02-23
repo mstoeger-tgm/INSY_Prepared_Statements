@@ -67,6 +67,10 @@ public class CRUD {
 		return null;
 	}
 
+	/**
+	 * @param value
+	 * @param where
+	 */
 	public void update(int value, int where) {
 		try {
 			PreparedStatement ps = con.prepareStatement(updateTableSQL);
@@ -79,14 +83,17 @@ public class CRUD {
 		}
 	}
 
+	/**
+	 * @param where
+	 */
 	public void delete(int where) {
 		try {
 			PreparedStatement ps = con.prepareStatement(deleteTableSQL);
 			ps.setInt(1, where);  
 			ps.executeQuery();
-			System.out.println("L�schen erfolgreich");
+			System.out.println("Loeschen erfolgreich");
 		} catch (SQLException e) {
-			System.err.println("Fehler beim L�schen!");
+			System.err.println("Fehler beim Loeschen!");
 		}
 	}
 	/**
