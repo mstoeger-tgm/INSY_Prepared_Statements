@@ -114,7 +114,8 @@ public class CRUD {
 		}
 		int begin = Integer.parseInt(tmp)+1;
 		for(int i=0;i<count;++i,++begin){
-			
+			String values = Integer.toString(begin)+","+"TEST"+",1";
+			create("produkt", values);
 		}
 	}
 }
