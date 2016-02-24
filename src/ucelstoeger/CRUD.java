@@ -28,7 +28,8 @@ public class CRUD {
 		try {
 			con = dbconn.getConnection();
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Verbinden zur Datenbank!");
+			System.err.println("Fehler beim Verbinden zur Datenbank!");
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -48,7 +49,7 @@ public class CRUD {
 		}
 	}
 	/**
-	 * 
+	 * Gibt Daten aus der Datenbank als Resultset zurueck
 	 * @param what
 	 * @param table
 	 * @param where
@@ -68,6 +69,7 @@ public class CRUD {
 	}
 
 	/**
+	 * Veraendert Daten in der Datenbank
 	 * @param value
 	 * @param where
 	 */
@@ -84,6 +86,7 @@ public class CRUD {
 	}
 
 	/**
+	 * Loescht Daten aus der Datenbank
 	 * @param where
 	 */
 	public void delete(int where) {
@@ -97,17 +100,21 @@ public class CRUD {
 		}
 	}
 	/**
-	 * 
-	 * @param count
-	 * @param valuescount
-	 * @param table
+	 * Generiert Zufallsdaten in die "produkt" Tabelle
+	 * @param count <- Wie viele Zeilen
 	 */
-	public void dataFiller(int count, int valuescount, String table){
-		for(int i=0;i<count;++i){
-			String values = "";
-			for(int i2=0;i2<valuescount;++i2){
-				
-			}
+	public void dataFiller(int count){
+		ResultSet maxnumber = read("max(nummer)","produkt", "true");
+		String tmp ="";
+		try {
+			maxnumber.next();
+			tmp = maxnumber.getString(1);
+		} catch (SQLException e) {
+			System.err.println("Fehler beim lesen der Datenbank");
+		}
+		int begin = Integer.parseInt(tmp)+1;
+		for(int i=0;i<count;++i,++begin){
+			
 		}
 	}
 }
