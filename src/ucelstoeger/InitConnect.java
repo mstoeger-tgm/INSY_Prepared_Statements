@@ -23,7 +23,8 @@ public class InitConnect {
 	 *            <--- Kommandozeilenparameter
 	 */
 	public InitConnect(String args[]) {
-		if (args.length == 2 && args[0].equals("-c")) {
+		//Properties - File über das Argument -f 
+		if (args.length == 2 && args[0].equals("-f")) {
 			// Properties file
 			PropertiesFileReader pfr = new PropertiesFileReader();
 			pfr.getPropertiesFromFile(args[1]);
@@ -45,6 +46,7 @@ public class InitConnect {
 				port = 5432; // PostgreSQL Default Port
 			if (settings.isHelp()) {
 				cmd.usage();
+				System.out.println("-f for Properties - File");
 				return;
 			}
 		}

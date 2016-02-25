@@ -117,7 +117,7 @@ public class CRUD {
 			PreparedStatement ps = con.prepareStatement(deleteTableSQL);
 			ps.setInt(1, where);
 			ps.executeUpdate();
-			System.out.println("Loeschen erfolgreich");
+			System.out.println("Loeschen vom Datensatz mit der Produktnummer "+where+" erfolgreich");
 		} catch (SQLException e) {
 			System.err.println("Fehler beim Loeschen!");
 			e.printStackTrace();
@@ -146,6 +146,7 @@ public class CRUD {
 		int begin = maxnummer + 1;
 		for (int i = 0; i < count; i++, begin++)
 			create(begin, "TEST" + begin, begin + 1);
-
+		System.out.println();
+		System.out.println("Es wurden erfolgreich "+count+" Datensätze generiert");
 	}
 }

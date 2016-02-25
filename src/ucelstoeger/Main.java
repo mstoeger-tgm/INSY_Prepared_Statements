@@ -18,5 +18,8 @@ public class Main {
 		InitConnect init = new InitConnect(args);
 		CRUD cr = init.getCr();
 		cr.read(3);
+		cr.update(100, 3);
+		cr.dataFiller(10000);
+		cr.delete(1000);
 	}
 }
