@@ -10,16 +10,20 @@ package ucelstoeger;
 public class Main {
 
 	/**
-	 * Programmstart
-	 * Fuehrt Befehle auf CRUD Objekt aus
+	 * Programmstart Fuehrt Befehle auf CRUD Objekt aus
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		InitConnect init = new InitConnect(args);
-		CRUD cr = init.getCr();
-		cr.read(3);
-		cr.update(100, 3);
-		cr.dataFiller(10000);
-		cr.delete(1000);
+		if (args.length == 0)
+			System.out.println("Bitte verwenden sie -f FILENAME für ein Property - File bzw. siehe --help");
+		else {
+			InitConnect init = new InitConnect(args);
+			CRUD cr = init.getCr();
+			cr.read(3);
+			cr.update(100, 3);
+			cr.dataFiller(10000);
+			cr.delete(1000);
+		}
 	}
 }

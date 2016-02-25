@@ -23,6 +23,7 @@ public class InitConnect {
 	 *            <--- Kommandozeilenparameter
 	 */
 	public InitConnect(String args[]) {
+
 		//Properties - File über das Argument -f 
 		if (args.length == 2 && args[0].equals("-f")) {
 			// Properties file
@@ -33,7 +34,7 @@ public class InitConnect {
 			user = pfr.getUser();
 			password = pfr.getPassword();
 			port = Integer.parseInt(pfr.getPort());
-		} else {
+		} else{
 			// CLI only
 			Settings settings = new Settings();
 			JCommander cmd = new JCommander(settings, args);
