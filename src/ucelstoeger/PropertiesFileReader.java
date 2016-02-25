@@ -57,22 +57,37 @@ public class PropertiesFileReader {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String getHost() {
 		return host;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getPort() {
 		return port;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getDatabase() {
 		return database;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getUser() {
 		return user;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getPassword() {
 		return password;
 	}
