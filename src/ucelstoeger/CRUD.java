@@ -56,6 +56,8 @@ public class CRUD {
 	 * @return Ergebnis der Query als ResultSet
 	 */
 	public ResultSet read(String what, String table, String where) {
+		if(!(allowedString(what)||allowedString(table)||allowedString(where)))
+			return null;
 		try{
 			PreparedStatement ps = con.prepareStatement(readTableSQL);
 			ps.setString(1, what);
@@ -110,12 +112,21 @@ public class CRUD {
 			maxnumber.next();
 			tmp = maxnumber.getString(1);
 		} catch (SQLException e) {
-			System.err.println("Fehler beim lesen der Datenbank");
+			System.err.println("Fehler beim Auswerten");
 		}
 		int begin = Integer.parseInt(tmp)+1;
 		for(int i=0;i<count;++i,++begin){
 			String values = Integer.toString(begin)+","+"TEST"+",1";
 			create("produkt", values);
 		}
+	}
+	public boolean allowedString(String toCheck){
+		final String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPPQRSTUVWXYZ1234567890_()";
+		for(int i=0;i<toCheck.length();++i){
+			if(allowedChars.indexOf(toCheck.charAt(i))==-1){
+				return false;
+			}
+		}
+		return true;
 	}
 }
