@@ -1,23 +1,29 @@
 package ucelstoeger;
 
 import org.postgresql.ds.PGSimpleDataSource;
-
 import com.beust.jcommander.JCommander;
-
-import java.sql.*;
 
 /**
  * JDBC Prepared Statements
+ * 
  * @author Johannes Ucel, Michael Stoeger
  * @version 24.2.2015
  *
  */
 public class InitConnect {
-	private String host="", database="", user="", password="";
-	private int port=0;
+	private String host = "", database = "", user = "", password = "";
+	private int port = 0;
 	private CRUD cr;
-	public InitConnect(String args[]){
-		if (args.length == 2&&args[0].equals("-c")) {
+
+	/**
+	 * Liest Daten von CLI oder Properties File und erzeugt damit ein neues CRUD
+	 * Objekt
+	 * 
+	 * @param args
+	 *            <--- Kommandozeilenparameter
+	 */
+	public InitConnect(String args[]) {
+		if (args.length == 2 && args[0].equals("-c")) {
 			// Properties file
 			PropertiesFileReader pfr = new PropertiesFileReader();
 			pfr.getPropertiesFromFile(args[1]);
@@ -38,9 +44,9 @@ public class InitConnect {
 			if (port == 0)
 				port = 5432; // PostgreSQL Default Port
 			if (settings.isHelp()) {
-	            cmd.usage();
-	            return;
-	        }
+				cmd.usage();
+				return;
+			}
 		}
 		// Datenquelle erzeugen und konfigurieren
 		PGSimpleDataSource ds = new PGSimpleDataSource();
@@ -52,8 +58,14 @@ public class InitConnect {
 		// Verbindung herstellen
 		cr = new CRUD(ds);
 	}
+
+	/**
+	 * Gibt das CRUD Objekt zurueck
+	 * 
+	 * @return CRUD
+	 */
 	public CRUD getCr() {
 		return cr;
 	}
-	
+
 }

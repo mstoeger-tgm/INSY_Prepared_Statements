@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import org.postgresql.ds.PGSimpleDataSource;
 
 /**
@@ -55,7 +54,7 @@ public class CRUD {
 			ps.setString(2, bezeichnung);
 			// Drittes "?" mit einem Integerwert (Gewicht) ersetzen
 			ps.setInt(3, gewicht);
-			// PreparedStatement durchführen
+			// PreparedStatement durchfï¿½hren
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Fehler beim Inserten");
@@ -63,17 +62,17 @@ public class CRUD {
 	}
 
 	/**
-	 * Liest aus der Datenbank die Zeile mit der gewünschten Nummer aus
+	 * Liest aus der Datenbank die Zeile mit der gewï¿½nschten Nummer aus
 	 * 
 	 * @param nummer
-	 *            - Die gewünschte Nummer (Integerwert)
+	 *            - Die gewï¿½nschte Nummer (Integerwert)
 	 */
 	public void read(int nummer) {
 		try {
 			PreparedStatement ps = con.prepareStatement(readTableSQL);
 			// Ersetzt die Nummer (Integerwert)
 			ps.setInt(1, nummer);
-			// Für die Ausgabe der gewünschten Zeile wird ein ResultSet erzeugt
+			// Fï¿½r die Ausgabe der gewï¿½nschten Zeile wird ein ResultSet erzeugt
 			ResultSet tmp = ps.executeQuery();
 			while (tmp.next()) {
 				System.out.print("Nummer: " + tmp.getInt(1));
@@ -89,7 +88,7 @@ public class CRUD {
 	 * Veraendert bzw. Updated Daten in der Datenbank
 	 * 
 	 * @param gewicht
-	 *            - Das gewünschte Gewicht als Integerwert
+	 *            - Das gewï¿½nschte Gewicht als Integerwert
 	 * @param where
 	 *            - Die Produktnummer (Integerwert)
 	 */
@@ -111,7 +110,7 @@ public class CRUD {
 	 * Loescht Daten aus der Datenbank
 	 * 
 	 * @param where
-	 *            - Gibt die gewünschte Produktnummer an
+	 *            - Gibt die gewï¿½nschte Produktnummer an
 	 */
 	public void delete(int where) {
 		try {
@@ -135,7 +134,7 @@ public class CRUD {
 		int maxnummer = 0;
 		try {
 			Statement tmp = con.createStatement();
-			// Holt sich die aktuelle Maxnummer, um zukünftige Fehler mit der
+			// Holt sich die aktuelle Maxnummer, um zukï¿½nftige Fehler mit der
 			// falschen Produktnummer zu verhindern
 			ResultSet tmp2 = tmp.executeQuery("SELECT max(nummer) FROM produkt;");
 			while (tmp2.next()) {

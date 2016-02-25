@@ -4,10 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-
+/**
+ * Klasse zum Einlesen des Properties File
+ * @author Michael Stoeger
+ * @version 25.2.2016
+ */
 public class PropertiesFileReader {
-	private String host="", port="5432", database="", user="", password="";
-
+	private String host = "", port = "5432", database = "", user = "", password = "";
+	/**
+	 * Liest Einstellungen aus einer Datei
+	 * @param pathToFile
+	 */
 	public void getPropertiesFromFile(String pathToFile) {
 		// Read properties file
 		BufferedReader br = null;
@@ -21,7 +28,7 @@ public class PropertiesFileReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Extract properties from lines
+		// Extract properties from lines
 		for (String e : lines) {
 			if (e.contains("host")) {
 				host = e.substring(e.indexOf('=') + 1);
@@ -52,41 +59,41 @@ public class PropertiesFileReader {
 				break;
 			}
 		}
-		if(host==""||database==""||user==""||password==""){
+		if (host == "" || database == "" || user == "" || password == "") {
 			throw new InvalidParameterException("Nicht alle benoetigten Parameter angegeben");
 		}
 	}
 
 	/**
-	 * @return
+	 * @return host
 	 */
 	public String getHost() {
 		return host;
 	}
 
 	/**
-	 * @return
+	 * @return port
 	 */
 	public String getPort() {
 		return port;
 	}
 
 	/**
-	 * @return
+	 * @return database
 	 */
 	public String getDatabase() {
 		return database;
 	}
 
 	/**
-	 * @return
+	 * @return user
 	 */
 	public String getUser() {
 		return user;
 	}
 
 	/**
-	 * @return
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;

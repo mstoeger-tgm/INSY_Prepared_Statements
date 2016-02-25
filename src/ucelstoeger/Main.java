@@ -3,13 +3,15 @@ package ucelstoeger;
 /**
  * Zentrale Main - Klasse, wo die CRUD - Methoden aufgerufen werden
  * 
- * @author Johannes Ucel, Michael Stöger
+ * @author Johannes Ucel, Michael Stï¿½ger
  * @version 25. Feb. 2016
  *
  */
 public class Main {
 
 	/**
+	 * Programmstart
+	 * Fuehrt Befehle auf CRUD Objekt aus
 	 * @param args
 	 */
 	public static void main(String[] args) {
